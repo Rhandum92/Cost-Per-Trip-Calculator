@@ -1,161 +1,65 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trip Cost Calculator</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    <link rel="stylesheet" href="styles.css">
+  </head>
 
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 10px;
-        }
-
-        .section {
-            width: 50%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .form-container {
-            background-color: #f0f0f0;
-            padding: 15px;
-            height: 350px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .result-container {
-            background-color: #948285;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: right;
-            font-size: 14px;
-            color: #f4eeec;
-            margin-top: 2px;
-        }
-
-        .step-container {
-            padding: 5px;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            margin-top: 2px;
-        }
-
-        .step1-container {
-            background-color: #D4B898;
-        }
-
-        .step2-container {
-            background-color: #948285;
-        }
-
-        label {
-            font-weight: bold;
-            color: black;
-            font-size: 14px;
-            padding-right: 10px;
-        }
-
-        #result-total {
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        #calculation-steps {
-            background-color: #f0f0f0;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-top: 10px;
-        }
-
-        #title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-
-<body>
-
+  <body>
     <div id="title">Trip Cost Calculator</div>
     <div style="color:#A65F6B; text-align:center; font-weight:bold;">Formula: (Number Of Miles / Vehicle MPG) * Cost Of Gas Per Gallon</div>
     <div class="container">
-        <!-- Left Section - Calculation Steps -->
-        <div class="section">
-            <div id="calculation-steps">
-                <h3 style="font-weight:bold;">Calculation Steps</h3>
-                <p style="font-size:14px;font-weight:bold;">Step 1: Calculate Total Gas Needed</p>
-                <p style="font-size:14px;color:#A65F6B;"><strong>Formula:</strong> Number Of Miles / Vehicle MPG = Total Gas Needed</p>
-                <div class="step1-container step-container">
-                    <p style="justify-content:center;font-size:14px;color:#2B0306;" id="step1"></p>
-                </div>
-                <p style="font-size:14px;font-weight:bold;">Step 2: Calculate Total Cost</p>
-                <p style="font-size:14px;color:#A65F6B;"><strong>Formula:</strong> Total Gas Needed * Cost Of Gas Per Gallon = Total Cost</p>
-                <div class="step2-container step-container">
-                    <p style="justify-content:center;font-size:14px;color:#2B0306;" id="step2"></p>
-                </div>
-            </div>
+      <!-- Left Section - Calculation Steps -->
+      <div class="section">
+        <div id="calculation-steps">
+          <h3 style="font-weight:bold;">Calculation Steps</h3>
+          <p style="font-size:14px;font-weight:bold;">Step 1: Calculate Total Gas Needed</p>
+          <p style="font-size:14px;color:#A65F6B;"><strong>Formula:</strong> Number Of Miles / Vehicle MPG = Total Gas Needed</p>
+          <div class="step1-container step-container">
+            <p style="justify-content:center;font-size:14px;color:#2B0306;" id="step1"></p>
+          </div>
+          <p style="font-size:14px;font-weight:bold;">Step 2: Calculate Total Cost</p>
+          <p style="font-size:14px;color:#A65F6B;"><strong>Formula:</strong> Total Gas Needed * Cost Of Gas Per Gallon = Total Cost</p>
+          <div class="step2-container step-container">
+            <p style="justify-content:center;font-size:14px;color:#2B0306;" id="step2"></p>
+          </div>
         </div>
+      </div>
 
-        <!-- Right Section - User Input Form -->
-        <div class="section">
-            <div class="form-container">
-                <form id="trip-cost-form">
-                    <h3 style="font-weight:bold;">Trip Cost Form</h3>
-                    <div style="display:flex; padding-bottom: 15px;">
-                        <div style="width:50%;">
-                            <label for="vehicle_mpg">Vehicle MPG (hwy):</label>
-                        </div>
-                        <div style="width:50%;">
-                            <input type="number" id="vehicle_mpg" step="0.1">
-                        </div>
-                    </div>
-                    <div style="display:flex; padding-bottom: 15px;">
-                        <div style="width:50%;">
-                            <label for="gas_cost">Cost Of Gas Per Gallon ($):</label>
-                        </div>
-                        <div style="width:50%;">
-                            <input type="number" id="gas_cost" step="0.01">
-                        </div>
-                    </div>
-                    <div style="display:flex; padding-bottom: 15px;">
-                        <div style="width:50%;">
-                            <label for="trip_miles">Number Of Miles for Trip:</label>
-                        </div>
-                        <div style="width:50%;">
-                            <input type="number" id="trip_miles" step="1">
-                        </div>
-                    </div>
-                    <div style="padding-bottom: 15px;">
-                        <input type="button" onclick="clearFields()" value="Reset" style="float:right;background-color:#2B0306; color: #f4eeec; border: none; padding: 10px 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin:5px;">
-                        <input type="button" onclick="calculateTripCost()" value="Calculate" style="float:right;background-color: #A65F6B; color: #f4eeec; border: none; padding: 10px 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin:5px;">
-                    </div>
-                </form>
-                <br><br><br><br><br><br><br>
-                <div class="result-container">
-                    <label for="result-total" style="color:#f4eeec;">Total Cost ($):</label>
-                    <span id="result-total"></span>
-                </div>
+      <!-- Right Section - User Input Form -->
+      <div class="section">
+        <div class="form-container">
+          <form id="trip-cost-form">
+            <h3 style="font-weight:bold;">Trip Cost Form</h3>
+            <div class="form-group">
+              <label for="vehicle_mpg">Vehicle MPG (hwy):</label>
+              <input type="number" id="vehicle_mpg" step="0.1">
             </div>
+            <div class="form-group">
+              <label for="gas_cost">Cost Of Gas Per Gallon ($):</label>
+              <input type="number" id="gas_cost" step="0.01">
+            </div>
+            <div class="form-group">
+              <label for="trip_miles">Number Of Miles for Trip:</label>
+              <input type="number" id="trip_miles" step="1">
+            </div>
+            <div class="form-buttons">
+              <input type="button" onclick="clearFields()" value="Reset" class="button reset-button">
+              <input type="button" onclick="calculateTripCost()" value="Calculate" class="button calculate-button">
+            </div>
+          </form>
+          <div class="result-container">
+            <label for="result-total" style="color:#f4eeec;">Total Cost ($):</label>
+            <span id="result-total"></span>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+
+    <script src="scripts.js"></script>
+  </body>
 
 </html>
